@@ -16,7 +16,6 @@ class RootIndex extends React.Component {
 
     return (
       <Layout location={this.props.location}>
-        <Clouds />
 
         {/*<iframe*/}
         {/*    className={styles.background}*/}

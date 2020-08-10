@@ -1,9 +1,11 @@
-import React, { useLayoutEffect } from "react";
+import React, { useLayoutEffect, useState } from "react";
 
 import styles from "./hero.module.css";
 import styled from "styled-components";
 import { Progress } from "./progress";
 import Stopwatch from "./stopwatch";
+import { Clouds } from "./clouds";
+import Layout from "./layout";
 
 const Content = styled.div`
   height: 100%;
@@ -41,22 +43,51 @@ const StopwatchWrapper = styled.div`
   padding: 12px;
 `;
 
+const PlayBtn = styled.div`
+  transition: all 0.4s;
+  opacity: 0.6;
+  &:hover {
+    opacity: 0.8;
+  }
+`;
+
 export default ({ data }) => {
-  useLayoutEffect(() => {
-    const audio = document.getElementById("bgm");
-    audio.volume = 0.3;
-    audio.play();
-  }, []);
+  let [show, setShow] = useState(false);
+  useLayoutEffect(() => {}, []);
 
   return (
     <div className={styles.hero}>
+      <Clouds />
+
       <Content>
         <ProgressWrapper>
-          <h1>
+          <h1 css={"margin-bottom: 48px"}>
             <b>Progress</b>
           </h1>
           <Progress />
         </ProgressWrapper>
+          <PlayBtn
+              show={show}
+              onClick={() => {
+                  const audio = document.getElementById("bgm");
+                  audio.volume = 0.3;
+                  audio.play();
+                  setShow(true);
+              }}
+              css={`
+            margin-left: 16px;
+          `}
+          >
+              <svg
+                  width={"32px"}
+                  className="button"
+                  viewBox="0 0 60 60"
+                  onClick={undefined}
+              >
+                  <polygon fill={"#fff"} points="0,0 50,30 0,60" />
+              </svg>
+          </PlayBtn>
+
         <StopwatchWrapper>
           <Stopwatch />
         </StopwatchWrapper>
