@@ -3,9 +3,9 @@ import { createGlobalStyle } from 'styled-components';
 import { generateMedia } from 'styled-media-query';
 
 export const breakpoints = {
-	large: '1200px',
-	medium: '992px',
-	small: '768px',
+  large: '1200px',
+  medium: '992px',
+  small: '768px',
 };
 
 export const media = generateMedia(breakpoints);
