@@ -1,7 +1,7 @@
-import { ProgressBar, Step } from "react-step-progress-bar";
-import "react-step-progress-bar/styles.css";
-import React from "react";
-import ReactTooltip from "react-tooltip";
+import { ProgressBar, Step } from 'react-step-progress-bar';
+import 'react-step-progress-bar/styles.css';
+import React from 'react';
+import ReactTooltip from 'react-tooltip';
 
 export const Progress = () => (
   <>
@@ -15,47 +15,27 @@ export const Progress = () => (
     >
       <Step transition="scale">
         {({ accomplished, index }) => (
-          <div
-            className={`transitionStep ${accomplished ? "accomplished" : null}`}
-          >
-            🌑
-          </div>
+          <div className={`transitionStep ${accomplished ? 'accomplished' : null}`}>🌑</div>
         )}
       </Step>
       <Step transition="scale">
         {({ accomplished, index }) => (
-          <div
-            className={`transitionStep ${accomplished ? "accomplished" : null}`}
-          >
-            🌒
-          </div>
+          <div className={`transitionStep ${accomplished ? 'accomplished' : null}`}>🌒</div>
         )}
       </Step>
       <Step transition="scale">
         {({ accomplished, index }) => (
-          <div
-            className={`transitionStep ${accomplished ? "accomplished" : null}`}
-          >
-            🌓
-          </div>
+          <div className={`transitionStep ${accomplished ? 'accomplished' : null}`}>🌓</div>
         )}
       </Step>
       <Step transition="scale">
         {({ accomplished, index }) => (
-          <div
-            className={`transitionStep ${accomplished ? "accomplished" : null}`}
-          >
-            🌔
-          </div>
+          <div className={`transitionStep ${accomplished ? 'accomplished' : null}`}>🌔</div>
         )}
       </Step>
       <Step transition="scale">
         {({ accomplished, index }) => (
-          <div
-            data-tip
-            data-for="deadline"
-            className={`transitionStep ${accomplished ? "accomplished" : null}`}
-          >
+          <div data-tip data-for="deadline" className={`transitionStep ${accomplished ? 'accomplished' : null}`}>
             🌕
           </div>
         )}

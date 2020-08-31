@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component } from 'react';
 class Stopwatch extends Component {
   state = {
     timerOn: false,
@@ -10,7 +10,7 @@ class Stopwatch extends Component {
     this.setState({
       timerOn: true,
       timerTime: this.state.timerTime,
-      timerStart: new Date("2019-07-08T05:11:00.000Z"),
+      timerStart: new Date('2019-07-08T05:11:00.000Z'),
     });
     this.timer = setInterval(() => {
       this.setState({
@@ -21,11 +21,11 @@ class Stopwatch extends Component {
 
   render() {
     const { timerTime } = this.state;
-    let centiseconds = ("0" + (Math.floor(timerTime / 10) % 100)).slice(-2);
-    let seconds = ("0" + (Math.floor(timerTime / 1000) % 60)).slice(-2);
-    let minutes = ("0" + (Math.floor(timerTime / 60000) % 60)).slice(-2);
-    let hours = ("0" + Math.floor(timerTime / 3600000) % 24).slice(-2);
-    let days = ("0" + Math.floor(timerTime / 86400000)).slice(-3);
+    let centiseconds = ('0' + (Math.floor(timerTime / 10) % 100)).slice(-2);
+    let seconds = ('0' + (Math.floor(timerTime / 1000) % 60)).slice(-2);
+    let minutes = ('0' + (Math.floor(timerTime / 60000) % 60)).slice(-2);
+    let hours = ('0' + (Math.floor(timerTime / 3600000) % 24)).slice(-2);
+    let days = ('0' + Math.floor(timerTime / 86400000)).slice(-3);
     return (
       <div>
         <b>Time since last PlayTest</b>
