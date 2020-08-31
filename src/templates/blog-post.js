@@ -1,11 +1,35 @@
 import React from 'react';
-import { graphql } from 'gatsby';
+import { graphql, Link } from 'gatsby';
 import { Helmet } from 'react-helmet';
+import styled from 'styled-components';
 import get from 'lodash/get';
 import Img from 'gatsby-image';
-import Layout from '../components/layout';
 
-import heroStyles from '../components/hero.module.css';
+const ImageWrapper = styled.div`
+	width: 100%;
+	margin-bottom: 32px;
+`;
+
+const UnderImage = styled.div`
+	padding: 0 32px;
+	font-weight: 100;
+`;
+
+const Title = styled.h1`
+	color: currentColor;
+	text-decoration: none;
+	text-transform: uppercase;
+	margin-top: 0;
+	font-weight: 100;
+
+	&:hover {
+		text-decoration: underline;
+	}
+`;
+
+const Meta = styled.small`
+	color: #aaaaaa;
+`;
 
 class BlogPostTemplate extends React.Component {
 	render() {
@@ -13,29 +37,21 @@ class BlogPostTemplate extends React.Component {
 		const siteTitle = get(this.props, 'data.site.siteMetadata.title');
 
 		return (
-			<Layout location={this.props.location}>
-				<div style={{ background: '#fff' }}>
-					<Helmet title={`${post.title} | ${siteTitle}`} />
-					<div className={heroStyles.hero}>
-						<Img className={heroStyles.heroImage} alt={post.title} fluid={post.heroImage.fluid} />
-					</div>
-					<div className="wrapper">
-						<h1 className="section-headline">{post.title}</h1>
-						<p
-							style={{
-								display: 'block',
-							}}
-						>
-							{post.publishDate}
-						</p>
-						<div
-							dangerouslySetInnerHTML={{
-								__html: post.body.childMarkdownRemark.html,
-							}}
-						/>
-					</div>
-				</div>
-			</Layout>
+			<>
+				<Helmet title={`${post.title} | ${siteTitle}`} />
+				<ImageWrapper>
+					<Img alt={post.title} fluid={post.heroImage.fluid} />
+				</ImageWrapper>
+				<UnderImage>
+					<Title>{post.title}</Title>
+					<Meta>{post.publishDate}</Meta>
+					<article
+						dangerouslySetInnerHTML={{
+							__html: post.body.childMarkdownRemark.html,
+						}}
+					/>
+				</UnderImage>
+			</>
 		);
 	}
 }
