@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { Helmet } from 'react-helmet';
 import 'normalize.css';
 
-import { Header } from './Header';
+// import { Header } from './Header';
 import { Footer } from './Footer';
 import { GlobalStyle, media } from '../styled';
 
@@ -11,9 +11,9 @@ const Wrapper = styled.div``;
 
 const Row = styled.div``;
 
-const HeaderRow = styled(Row)`
-  border-bottom: #f0f0f2 1px solid;
-`;
+// const HeaderRow = styled(Row)`
+//   border-bottom: #f0f0f2 1px solid;
+// `;
 
 const ContentRow = styled(Row)`
   padding-top: 32px;
@@ -53,11 +53,11 @@ export class Template extends React.Component {
             rel="stylesheet"
           />
         </Helmet>
-        <HeaderRow>
-          <Section>
-            <Header />
-          </Section>
-        </HeaderRow>
+        {/*<HeaderRow>*/}
+        {/*  <Section>*/}
+        {/*    <Header />*/}
+        {/*  </Section>*/}
+        {/*</HeaderRow>*/}
         <ContentRow>
           <Section>{children}</Section>
         </ContentRow>
