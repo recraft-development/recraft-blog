@@ -1,5 +1,4 @@
 import { createGlobalStyle } from 'styled-components';
-
 import { generateMedia } from 'styled-media-query';
 
 export const breakpoints = {
@@ -41,5 +40,11 @@ export const GlobalStyle = createGlobalStyle`
 	ul {
 		padding: 0;
 		margin: 0;
+	}
+	a {
+	  display: block;
+	}
+	img {
+	  display: block;
 	}
 `;
