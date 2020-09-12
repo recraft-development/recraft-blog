@@ -35,6 +35,14 @@ const Meta = styled.small`
   color: #aaaaaa;
 `;
 
+const shrinkDescription = description => {
+  if (description.length <= 137) {
+    return description;
+  }
+
+  return `${description.slice(0, 137)}...`;
+};
+
 class BlogPostTemplate extends React.Component {
   render() {
     const post = get(this.props, 'data.contentfulBlogPost');
@@ -42,9 +50,8 @@ class BlogPostTemplate extends React.Component {
 
     const meta = {
       title: post.title,
-      description: post.rawMarkdownBody,
+      description: shrinkDescription(post.body.childMarkdownRemark.rawMarkdownBody),
       image: post.heroImage.file.url,
-      publishDate: post.publishDate,
       tags: post.tags,
       siteName: 'Recraft',
     };
@@ -53,12 +60,11 @@ class BlogPostTemplate extends React.Component {
       <>
         <Helmet title={`${post.title} | ${siteTitle}`}>
           <meta name="description" content={meta.description} />
-          <meta name="revised" content={post.publishDate} />
           <meta name="keywords" content={meta.tags} />
           <meta name="language" content="RU" />
 
           <meta name="og:title" content={meta.title} />
-          <meta name="og:description" content={meta.rawMarkdownBody} />
+          <meta name="og:description" content={meta.description} />
           <meta property="og:image" content={meta.image} />
           <meta property="og:site_name" content={meta.siteName} />
           <meta property="og:type" content="article" />
