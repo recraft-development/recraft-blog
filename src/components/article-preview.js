@@ -1,7 +1,6 @@
 import React from 'react';
 import { Link } from 'gatsby';
 import styled from 'styled-components';
-import Img from 'gatsby-image';
 
 const Wrapper = styled.div`
   background-color: #fff;
@@ -13,6 +12,11 @@ const Wrapper = styled.div`
 const ImageWrapper = styled(Link)`
   width: 100%;
   margin-bottom: 32px;
+`;
+
+const Image = styled.img`
+  width: 100%;
+  height: auto;
 `;
 
 const UnderImage = styled.div`
@@ -42,7 +46,7 @@ const ArticlePreview = ({ article }) => {
   return (
     <Wrapper>
       <ImageWrapper to={articlePath}>
-        <Img alt="" fluid={article.heroImage.fluid} />
+        <Image alt="" src={article.heroImage.file.url} />
       </ImageWrapper>
       <UnderImage>
         <h1>

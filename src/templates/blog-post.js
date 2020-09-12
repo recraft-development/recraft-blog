@@ -1,13 +1,17 @@
 import React from 'react';
-import { graphql, Link } from 'gatsby';
+import { graphql } from 'gatsby';
 import { Helmet } from 'react-helmet';
 import styled from 'styled-components';
 import get from 'lodash/get';
-import Img from 'gatsby-image';
 
 const ImageWrapper = styled.div`
   width: 100%;
   margin-bottom: 32px;
+`;
+
+const Image = styled.img`
+  width: 100%;
+  height: auto;
 `;
 
 const UnderImage = styled.div`
@@ -40,7 +44,7 @@ class BlogPostTemplate extends React.Component {
       <>
         <Helmet title={`${post.title} | ${siteTitle}`} />
         <ImageWrapper>
-          <Img alt={post.title} fluid={post.heroImage.fluid} />
+          <Image alt={post.title} src={post.heroImage.file.url} />
         </ImageWrapper>
         <UnderImage>
           <Title>{post.title}</Title>
@@ -59,14 +63,17 @@ class BlogPostTemplate extends React.Component {
 export default BlogPostTemplate;
 
 export const pageQuery = graphql`
+  fragment imageSrc on ContentfulAsset {
+    file {
+      url
+    }
+  }
   query BlogPostBySlug($slug: String!) {
     contentfulBlogPost(slug: { eq: $slug }) {
       title
       publishDate(formatString: "MMMM Do, YYYY")
       heroImage {
-        fluid(maxWidth: 1180, background: "rgb:000000") {
-          ...GatsbyContentfulFluid_tracedSVG
-        }
+        ...imageSrc
       }
       body {
         childMarkdownRemark {
