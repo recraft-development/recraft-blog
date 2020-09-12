@@ -35,14 +35,40 @@ const Meta = styled.small`
   color: #aaaaaa;
 `;
 
+const shrinkDescription = description => {
+  if (description.length <= 137) {
+    return description;
+  }
+
+  return `${description.slice(0, 137)}...`;
+};
+
 class BlogPostTemplate extends React.Component {
   render() {
     const post = get(this.props, 'data.contentfulBlogPost');
     const siteTitle = get(this.props, 'data.site.siteMetadata.title');
 
+    const meta = {
+      title: post.title,
+      description: shrinkDescription(post.body.childMarkdownRemark.rawMarkdownBody),
+      image: post.heroImage.file.url,
+      tags: post.tags,
+      siteName: 'Recraft',
+    };
+
     return (
       <>
-        <Helmet title={`${post.title} | ${siteTitle}`} />
+        <Helmet title={`${post.title} | ${siteTitle}`}>
+          <meta name="description" content={meta.description} />
+          <meta name="keywords" content={meta.tags} />
+          <meta name="language" content="RU" />
+
+          <meta name="og:title" content={meta.title} />
+          <meta name="og:description" content={meta.description} />
+          <meta property="og:image" content={meta.image} />
+          <meta property="og:site_name" content={meta.siteName} />
+          <meta property="og:type" content="article" />
+        </Helmet>
         <ImageWrapper>
           <Image alt={post.title} src={post.heroImage.file.url} />
         </ImageWrapper>
@@ -72,12 +98,14 @@ export const pageQuery = graphql`
     contentfulBlogPost(slug: { eq: $slug }) {
       title
       publishDate(formatString: "MMMM Do, YYYY")
+      tags
       heroImage {
         ...imageSrc
       }
       body {
         childMarkdownRemark {
           html
+          rawMarkdownBody
         }
       }
     }
