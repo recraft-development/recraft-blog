@@ -36,9 +36,29 @@ class BlogPostTemplate extends React.Component {
     const post = get(this.props, 'data.contentfulBlogPost');
     const siteTitle = get(this.props, 'data.site.siteMetadata.title');
 
+    const meta = {
+      title: post.title,
+      description: post.rawMarkdownBody,
+      image: post.heroImage.file.url,
+      publishDate: post.publishDate,
+      tags: post.tags,
+      siteName: 'Recraft',
+    };
+
     return (
       <>
-        <Helmet title={`${post.title} | ${siteTitle}`} />
+        <Helmet title={`${post.title} | ${siteTitle}`}>
+          <meta name="description" content={meta.description} />
+          <meta name="revised" content={post.publishDate} />
+          <meta name="keywords" content={meta.tags} />
+          <meta name="language" content="RU" />
+
+          <meta name="og:title" content={meta.title} />
+          <meta name="og:description" content={meta.rawMarkdownBody} />
+          <meta property="og:image" content={meta.image} />
+          <meta property="og:site_name" content={meta.siteName} />
+          <meta property="og:type" content="article" />
+        </Helmet>
         <ImageWrapper>
           <Img alt={post.title} fluid={post.heroImage.fluid} />
         </ImageWrapper>
@@ -63,6 +83,7 @@ export const pageQuery = graphql`
     contentfulBlogPost(slug: { eq: $slug }) {
       title
       publishDate(formatString: "MMMM Do, YYYY")
+      tags
       heroImage {
         fluid(maxWidth: 1180, background: "rgb:000000") {
           ...GatsbyContentfulFluid_tracedSVG
@@ -71,6 +92,7 @@ export const pageQuery = graphql`
       body {
         childMarkdownRemark {
           html
+          rawMarkdownBody
         }
       }
     }
